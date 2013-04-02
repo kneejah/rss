@@ -38,6 +38,10 @@
 				Router_Routes::call("Login", $app);
 			});
 
+			$app->get('/signup', function() use ($app) {
+				Router_Routes::call("Signup", $app);
+			});
+
 			$app->get('/', function() use ($app) {
 				Router_Routes::call("Home", $app);
 			});
@@ -59,6 +63,19 @@
 			$controller = new $controller_name($app);
 			
 			$controller->$method();
+
+			self::respond($cont, $app);
+		}
+
+		public static function respond($cont, $app)
+		{
+			$method = $app->request()->getMethod();
+
+			$view_name = "View_{$cont}_{$method}";
+
+			$view = new $view_name($app);
+
+			$view->render();
 		}
 
 	}
