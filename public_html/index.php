@@ -31,5 +31,5 @@
 	}
 	spl_autoload_register('redis_autoload');
 
-	$routes = new Router_Routes();
-	$routes->go();
+	$router = new Engine_Router();
+	$router->route();
