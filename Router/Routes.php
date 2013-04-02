@@ -17,7 +17,7 @@
     			'expires' => '24 hours',
     			'path' => '/',
     			'domain' => null,
-    			'secure' => false,
+    			'secure' => true,
     			'httponly' => false,
     			'name' => 'slim_session',
     			'secret' => 'thisisamagicalsecretofsecrecy',
@@ -32,17 +32,33 @@
 
 		public function go()
 		{
-			$this->app->get('/', function() {
-				echo "Hello world!";
+			$app = $this->app;
+
+			$app->get('/login', function() use ($app) {
+				Router_Routes::call("Login", $app);
 			});
 
-			$this->app->get('/session', function() {
+			$app->get('/', function() use ($app) {
+				Router_Routes::call("Home", $app);
+			});
+
+			$app->get('/session', function() use ($app) {
 				echo "<pre>";
 				print_r($_SESSION);
 				echo "</pre>";
 			});
 
 			$this->app->run();
+		}
+
+		public static function call($cont, $app)
+		{
+			$method = $app->request()->getMethod();
+
+			$controller_name = "Controller_$cont";
+			$controller = new $controller_name($app);
+			
+			$controller->$method();
 		}
 
 	}
