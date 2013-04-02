@@ -5,7 +5,9 @@
 
 		public function GET()
 		{
-			echo "it's time to log in yo!";
+			// Do nothing here, just show a form
+			$policy = new Policy_LoggedOut($this->app);
+			$policy->ensure();
 		}
 
 	}

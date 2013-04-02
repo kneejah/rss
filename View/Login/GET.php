@@ -5,8 +5,7 @@
 
 		public function render()
 		{
-			echo "i love dongs";
-			print_r($this->app);
+			return array();
 		}
 
 	}
