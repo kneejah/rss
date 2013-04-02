@@ -1,4 +1,5 @@
 <?php
+
 	require '../vendor/autoload.php';
 
 	// The standard PHP autoloader
@@ -23,4 +24,5 @@
 	}
 	spl_autoload_register('redis_autoload');
 
-	Routes_Route::init();
+	$routes = new Router_Routes();
+	$routes->go();
