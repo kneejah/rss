@@ -10,4 +10,6 @@
 			$this->app = $app;
 		}
 
+		abstract public function render();
+
 	}
