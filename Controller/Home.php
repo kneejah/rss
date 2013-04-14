@@ -5,8 +5,7 @@
 
 		public function GET()
 		{
-			$policy = new Policy_LoggedIn($this->app);
-			$policy->ensure();
+			// Do nothing yet
 		}
 
 	}
