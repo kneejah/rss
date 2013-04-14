@@ -18,6 +18,7 @@
 		public static function respond($cont, $app)
 		{
 			$method = $app->request()->getMethod();
+			$new_cont = str_replace('_', '/', $cont);
 
 			// Render the view and get all the params
 			$view_name = "View_{$cont}_{$method}";
@@ -29,7 +30,7 @@
 			$mustache = new Mustache_Engine(
 				array('loader' => $loader)
 			);
-			echo $mustache->render($cont . "/" . $method, $vars);
+			echo $mustache->render($new_cont . "/" . $method, $vars);
 		}
 
 	}
