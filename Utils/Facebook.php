@@ -25,7 +25,7 @@
       			throw new Exception('Bad signed JSON signature!');
     		}
 
-    		if (!isset($data['expires']) || $data['expires'] < time() + 3600)
+    		if (isset($data['expires']) && $data['expires'] < time() + 3600)
     		{
     			throw new Exception('Signed request has expired!');
     		}

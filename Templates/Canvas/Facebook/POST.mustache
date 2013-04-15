@@ -6,15 +6,19 @@
 
 		<link rel="stylesheet" type="text/css" href="/css/style.css?x={{now}}" />
 
+		<script src="/js/rss.js?x={{now}}"></script>
 		<script src="http://connect.facebook.net/en_US/all.js"></script>
+		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+		<script src="http://raw.github.com/brandonaaron/jquery-mousewheel/master/jquery.mousewheel.js"></script>
 		<script src="http://code.createjs.com/easeljs-0.6.0.min.js"></script>
+		
 	</head>
 
- 	<body>
- 
-	    <div class="container">
-			<canvas class="window" id="window"></canvas>
-	    </div>
+	<body>
+
+		<div class="container">
+			<canvas class="canvas" width="50" height="50" id="canvas"></canvas>
+		</div>
 
 		
 		<div id="fb-root"></div>
@@ -25,17 +29,32 @@
 				xfbml      : true
 			});
 
-  	 		function setSize() {
-  	 			var width  = window.innerWidth;
-  	 			var height = window.innerHeight;
+			window.onload = function() {
+				init();
+				setSize(true);
 
-    	      	var currWindow = document.getElementById('window');
-    	      	currWindow.style.height = (height - 60) + "px";
-    	      	currWindow.style.width = (width - 40) + "px";
-  	    	}
+				$('#canvas').mousewheel(function(event, delta, deltaX, deltaY) {
+    				console.log("delta: " + delta);
+				});
+			};
 
-	   		setSize();
-  	   		window.onresize = setSize;
+			function setSize(shouldTick) {
+				var width  = window.innerWidth;
+				var height = window.innerHeight;
+
+				var currWindow = document.getElementById('canvas');
+				currWindow.height = (height - 40);
+				currWindow.width = (width - 40);
+
+				if (shouldTick)
+				{
+					update = true;
+					tick();
+				}
+			}
+			setSize(false);
+
+			window.onresize = function() { setSize(true); };
 		</script>
 
 	</body>

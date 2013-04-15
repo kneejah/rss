@@ -8,10 +8,10 @@ body
 	padding:          0px;
 }
 
-.window
+.canvas
 {
 	background-color: #000000;
-	border:           1px #EEEEEE solid;
+	border:           1px #000000 solid;
 	margin-left:      20px;
 	margin-top:       20px;
 }
