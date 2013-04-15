@@ -1,1 +1,43 @@
-Templates_Canvas_Facebook_POST.mustache
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+	
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+		<link rel="stylesheet" type="text/css" href="/css/style.css?x={{now}}" />
+
+		<script src="http://connect.facebook.net/en_US/all.js"></script>
+		<script src="http://code.createjs.com/easeljs-0.6.0.min.js"></script>
+	</head>
+
+ 	<body>
+ 
+	    <div class="container">
+			<canvas class="window" id="window"></canvas>
+	    </div>
+
+		
+		<div id="fb-root"></div>
+		<script>
+			FB.init({
+				appId      : '{{app_id}}',
+				status     : true,
+				xfbml      : true
+			});
+
+  	 		function setSize() {
+  	 			var width  = window.innerWidth;
+  	 			var height = window.innerHeight;
+
+    	      	var currWindow = document.getElementById('window');
+    	      	currWindow.style.height = (height - 60) + "px";
+    	      	currWindow.style.width = (width - 40) + "px";
+  	    	}
+
+	   		setSize();
+  	   		window.onresize = setSize;
+		</script>
+
+	</body>
+	
+</html>

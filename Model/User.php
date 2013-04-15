@@ -4,7 +4,6 @@
 	{
 
 		protected $user_id;
-		protected $user_name;
-		protected $password_hash;
+		protected $facebook_id;
 
 	}
