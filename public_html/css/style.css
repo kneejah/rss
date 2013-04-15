@@ -1,0 +1,23 @@
+body
+{
+	font:             10pt verdana, arial, helvetica, times, sans-serif;
+	color:            #AAAAAA;
+	background-image: url('/images/dirt.jpg');
+	height:           100%;
+	margin:           0px;
+	padding:          0px;
+}
+
+.window
+{
+	background-color: #000000;
+	border:           1px #EEEEEE solid;
+	margin-left:      20px;
+	margin-top:       20px;
+}
+
+.container
+{
+	width:   100%;
+	height:  100%;
+}
