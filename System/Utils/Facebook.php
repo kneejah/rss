@@ -17,7 +17,7 @@
 				throw new Exception('Unknown algorithm. Expected ' . self::SIGNED_REQUEST_ALGORITHM);
 			}
 
-			$facebook_configs = Engine_Config::get('facebook');
+			$facebook_configs = Config::get('facebook');
 
 			$expected_sig = hash_hmac('sha256', $payload, $facebook_configs->app_secret, $raw = true);
 
@@ -35,7 +35,7 @@
 
 		public static function getAuthorizeUrl()
 		{
-			$facebook_configs = Engine_Config::get('facebook');
+			$facebook_configs = Config::get('facebook');
 
 			$params = array(
 				'client_id'    => $facebook_configs->app_id,

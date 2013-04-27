@@ -1,6 +1,6 @@
 <?php
 
-	class Engine_Config
+	class Config
 	{
 
 		public static function get($file)

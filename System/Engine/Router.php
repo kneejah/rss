@@ -8,12 +8,12 @@
 		public function __construct()
 		{
 			$settings = array(
-				'debug' => true
+				'debug' => DEBUG_MODE
 			);
 
 			$app = new \Slim\Slim($settings);
 
-			$cookie = Engine_Settings::getCookie();
+			$cookie = Config_Settings::getCookie();
 			if ($cookie !== false)
 			{
 				$app->add($cookie);
@@ -26,7 +26,7 @@
 		{
 			$app = $this->app;
 
-			$routes = Engine_Settings::getRoutes();
+			$routes = Config_Settings::getRoutes();
 
 			foreach ($routes as $name => $data)
 			{
@@ -38,7 +38,7 @@
 				});
 			}
 
-			Engine_Settings::applyCustomRoutes($app);
+			Config_Settings::applyCustomRoutes($app);
 
 			$this->app->run();
 		}

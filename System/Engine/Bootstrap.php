@@ -1,17 +1,23 @@
 <?php
 
-	// Disable this some day
-	error_reporting(-1);
-	ini_set('error_reporting', -1);
-	ini_set('display_errors', 1);
-
 	define('APP_ROOT', dirname(__FILE__) . "/../../");
+
+	if (!defined('DEBUG_MODE'))
+	{
+		define('DEBUG_MODE', 1);
+	}
 
 	require APP_ROOT . 'vendor/autoload.php';
 
-	// The standard PHP autoloader
+	// Class autoloader, doesn't deal with namespaces yet
 	function class_autoloader($name)
 	{
+		// Shortcut for convenience
+		if ($name == "Config")
+		{
+			$name = "Engine_Config";
+		}
+
 		$className = str_replace('_', '/', $name);
 		$fileName = $className . '.php';
 
@@ -19,12 +25,25 @@
 		$path = APP_ROOT . $fileName;
 		if (file_exists($path))
 		{
-			$result = require_once($path);
+			$result = @include_once($path);
 		}
 		else
 		{
 			$path = APP_ROOT . 'System/' . $fileName;
-			$result = require_once($path);
+			$result = @include_once($path);
+		}
+
+		if ($result == false)
+		{
+			echo "Fatal error: could not include file ($path)\n";
+
+			if (DEBUG_MODE)
+			{
+				echo "\nStack trace:\n";
+				debug_print_backtrace();
+			}
+
+			die();
 		}
 
 		return ($result !== false);

@@ -1,16 +1,17 @@
 <?php
 
-	class Engine_Settings
+	class Config_Settings
 	{
 
 		public static function getRoutes()
 		{
 			$routes = array(
-				'Home'            => array('uri' => '/',                 'type' => 'get'),
-				'Canvas_Facebook' => array('uri' => '/canvas/facebook/', 'type' => 'post'),
-				// 'Canvas_Facebook' => array('uri' => '/canvas/facebook/', 'type' => 'get')
+				'Home' => array('uri' => '/', 'type' => 'get')
 			);
 
+			$config = Config::get('system');
+			$routes = array_merge($routes, $config->routes);
+			
 			return $routes;
 		}
 
@@ -25,19 +26,8 @@
 
 		public static function getCookie()
 		{
-			$cookie = new \Slim\Middleware\SessionCookie(array(
-    			'expires' => '24 hours',
-    			'path' => '/',
-    			'domain' => null,
-    			'secure' => false,
-    			'httponly' => false,
-    			'name' => 'slim_session',
-    			'secret' => 'thisisamagicalsecretofsecrecy',
-    			'cipher' => MCRYPT_RIJNDAEL_256,
-    			'cipher_mode' => MCRYPT_MODE_CBC
-			));
-
-			return $cookie;
+			$config = Config::get('system');
+			return $config->cookie;
 		}
 
 	}
