@@ -5,7 +5,7 @@
 
 		public function render()
 		{
-			return array();
+			return array('time' => time());
 		}
 
 	}

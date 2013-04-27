@@ -27,6 +27,17 @@
 
 			// Load the actual template
 			$loader = new Mustache_Loader_FilesystemLoader(APP_ROOT . 'Template');
+
+			try
+			{
+				$loader->load($new_cont . "/" . $method);
+			}
+			catch (Exception $e)
+			{
+				// Fall back to try to load the system templates
+				$loader = new Mustache_Loader_FilesystemLoader(APP_ROOT . 'System/Template');
+			}
+
 			$mustache = new Mustache_Engine(
 				array('loader' => $loader)
 			);
