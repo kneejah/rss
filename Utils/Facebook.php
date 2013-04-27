@@ -10,27 +10,27 @@
 			list($encoded_sig, $payload) = explode('.', $signed_request, 2);
 
 			$sig = self::base64UrlDecode($encoded_sig);
-    		$data = json_decode(self::base64UrlDecode($payload), true);
+			$data = json_decode(self::base64UrlDecode($payload), true);
 
-    		if (strtoupper($data['algorithm']) !== self::SIGNED_REQUEST_ALGORITHM)
-    		{
-    			throw new Exception('Unknown algorithm. Expected ' . self::SIGNED_REQUEST_ALGORITHM);
-    		}
+			if (strtoupper($data['algorithm']) !== self::SIGNED_REQUEST_ALGORITHM)
+			{
+				throw new Exception('Unknown algorithm. Expected ' . self::SIGNED_REQUEST_ALGORITHM);
+			}
 
-    		$facebook_configs = Engine_Config::get('facebook');
+			$facebook_configs = Engine_Config::get('facebook');
 
-    		$expected_sig = hash_hmac('sha256', $payload, $facebook_configs->app_secret, $raw = true);
+			$expected_sig = hash_hmac('sha256', $payload, $facebook_configs->app_secret, $raw = true);
 
 			if ($sig !== $expected_sig) {
-      			throw new Exception('Bad signed JSON signature!');
-    		}
+				throw new Exception('Bad signed JSON signature!');
+			}
 
-    		if (isset($data['expires']) && $data['expires'] < time() + 3600)
-    		{
-    			throw new Exception('Signed request has expired!');
-    		}
+			if (isset($data['expires']) && $data['expires'] < time() + 3600)
+			{
+				throw new Exception('Signed request has expired!');
+			}
 
-    		return $data;
+			return $data;
 		}
 
 		public static function getAuthorizeUrl()
@@ -50,14 +50,14 @@
 		public static function redirectViaJS($url)
 		{
 			echo '<script type="text/javascript">';
-    		echo 'top.location.href = "' . $url . '";';
+			echo 'top.location.href = "' . $url . '";';
 			echo '</script>';
 
 			die();
 		}
 
 		private static function base64UrlDecode($input) {
-    		return base64_decode(strtr($input, '-_', '+/'));
-  		}
+			return base64_decode(strtr($input, '-_', '+/'));
+		}
 
 	}

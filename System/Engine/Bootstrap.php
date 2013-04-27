@@ -12,22 +12,22 @@
 	// The standard PHP autoloader
 	function class_autoloader($name)
 	{
-    	$className = str_replace('_', '/', $name);
-    	$fileName = $className . '.php';
+		$className = str_replace('_', '/', $name);
+		$fileName = $className . '.php';
 
-    	// Look for file in the normal path first, then under system
+		// Look for file in the normal path first, then under system
 		$path = APP_ROOT . $fileName;
-    	if (file_exists($path))
-    	{
-    		$result = require_once($path);
-    	}
-    	else
-    	{
-    		$path = APP_ROOT . 'System/' . $fileName;
-    		$result = require_once($path);
-    	}
-    	
-    	return ($result !== false);
+		if (file_exists($path))
+		{
+			$result = require_once($path);
+		}
+		else
+		{
+			$path = APP_ROOT . 'System/' . $fileName;
+			$result = require_once($path);
+		}
+
+		return ($result !== false);
 	}
 	spl_autoload_register('class_autoloader');
 
