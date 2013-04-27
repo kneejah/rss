@@ -26,7 +26,7 @@
 			$vars = $view->render();
 
 			// Load the actual template
-			$loader = new Mustache_Loader_FilesystemLoader(APP_ROOT . 'Templates');
+			$loader = new Mustache_Loader_FilesystemLoader(APP_ROOT . 'Template');
 			$mustache = new Mustache_Engine(
 				array('loader' => $loader)
 			);
